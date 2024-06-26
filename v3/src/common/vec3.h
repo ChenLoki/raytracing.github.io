@@ -66,8 +66,11 @@ class vec3 {
             return vec3(random_double(), random_double(), random_double());
         }
 
-        inline static vec3 random(double min, double max) {
-            return vec3(random_double(min,max), random_double(min,max), random_double(min,max));
+        inline static vec3 random(double min, double max) 
+        {
+            return vec3(random_double(min,max), 
+                        random_double(min,max),
+                        random_double(min,max));
         }
 
     public:
@@ -122,31 +125,41 @@ inline vec3 cross(const vec3 &u, const vec3 &v) {
                 u.e[0] * v.e[1] - u.e[1] * v.e[0]);
 }
 
-inline vec3 unit_vector(vec3 v) {
+inline vec3 unit_vector(vec3 v) 
+{
     return v / v.length();
 }
 
-inline vec3 random_in_unit_disk() {
-    while (true) {
+inline vec3 random_in_unit_disk() 
+{
+    while (true) 
+    {
         auto p = vec3(random_double(-1,1), random_double(-1,1), 0);
         if (p.length_squared() >= 1) continue;
         return p;
     }
 }
 
-inline vec3 random_in_unit_sphere() {
-    while (true) {
+// 单位球体内的一个随机点p(x,y,z)
+inline vec3 random_in_unit_sphere()
+{
+    while (true) 
+    {
         auto p = vec3::random(-1,1);
         if (p.length_squared() >= 1) continue;
+        
         return p;
     }
 }
 
-inline vec3 random_unit_vector() {
+// 将随机点p(x,y,z)单位化到球体表面
+inline vec3 random_unit_vector()
+{
     return unit_vector(random_in_unit_sphere());
 }
 
-inline vec3 random_in_hemisphere(const vec3& normal) {
+inline vec3 random_in_hemisphere(const vec3& normal) 
+{
     vec3 in_unit_sphere = random_in_unit_sphere();
     if (dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
         return in_unit_sphere;

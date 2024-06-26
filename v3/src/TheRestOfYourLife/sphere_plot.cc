@@ -15,8 +15,10 @@
 #include <math.h>
 
 
-int main() {
-    for (int i = 0; i < 2000; i++) {
+int main() 
+{
+    for (int i = 0; i < 2000; i++) 
+    {
         auto r1 = random_double();
         auto r2 = random_double();
         auto x = cos(2*pi*r1)*2*sqrt(r2*(1-r2));
